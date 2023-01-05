@@ -1,11 +1,14 @@
 /* Colors of origin */
 :root{
-    --dark-color: black;
+    --background: #232222;
+    --dark-color: rgb(46, 1, 118);
     --light-color: white;
+    --main-light: rgb(211, 184, 255);
     --main-color: rgb(137, 64, 255);
     --highscore: rgb(221, 255, 197);
     --titles: rgb(255, 187, 255);
     --circular-edges: 10px;
+    --light-circular-edges: 5px;
     --circle: 25px;
 }
 
@@ -17,9 +20,15 @@ h1{
 }
 
 h2{
-    font-size: 2.6rem;
-    text-align: center;
-    color: var(--main-color);
+    font-size: 2.7rem;
+    text-align: left;
+    color: var(--main-light);
+}
+
+h3{
+    font-size: 2.7rem;
+    text-align: left;
+    color: var(--light-color);
 }
 
 p {
@@ -28,12 +37,11 @@ p {
 }
 
 nav li {
-    display: flex;
+    display: inline;
     list-style: none;
     color: var(--light-color);
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     margin: 0% 1% 0% 1%;
-    justify-content:flex-end;
 }
 
 button {
@@ -43,6 +51,27 @@ button {
     color: var(--light-color);
     padding: 0.8rem;
     border-radius: 10px;
+    font-weight: 600;
+}
+
+button:active {
+    border: none;
+    font-size: 1.5rem;
+    background-color:var(--dark-color);
+    color: var(--light-color);
+    padding: 0.8rem;
+    border-radius: var(--circular-edges);
+    font-weight: 600;
+}
+
+input {
+    border-style: solid;
+    font-size: 1.5rem;
+    background-color:var(--background);
+    border-color: var(--main-light);
+    color: var(--light-color);
+    padding: 0.8rem;
+    border-radius: var(--light-circular-edges);
     font-weight: 600;
 }
 
@@ -84,6 +113,13 @@ header a:visited {
     flex-direction: row;
 }
 
+/* SECTIONS OF REGISTRATION */
+.registration {
+    justify-content: left;
+    margin: 0% 20% 0% 20%;
+    text-align: left;
+}
+
 /* HIGHSCORE */
 .highscore {
     justify-content: center;
@@ -100,11 +136,11 @@ header a:visited {
     display: none;
 }
 
-.highscore {
+.registration {
     display: none;
 }
 
-.answers {
+.highscore {
     display: none;
 }
 
