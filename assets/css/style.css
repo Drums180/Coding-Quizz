@@ -1,0 +1,114 @@
+/* Colors of origin */
+:root{
+    --dark-color: black;
+    --light-color: white;
+    --main-color: rgb(137, 64, 255);
+    --highscore: rgb(221, 255, 197);
+    --titles: rgb(255, 187, 255);
+    --circular-edges: 10px;
+    --circle: 25px;
+}
+
+/* GENERAL STYLES */
+h1{
+    font-size: 3rem;
+    text-align: center;
+    color: var(--titles);
+}
+
+h2{
+    font-size: 2.6rem;
+    text-align: center;
+    color: var(--main-color);
+}
+
+p {
+    font-size: 1.7rem;
+    line-height: 3.5rem;
+}
+
+nav li {
+    display: flex;
+    list-style: none;
+    color: var(--light-color);
+    font-size: 1.5rem;
+    margin: 0% 1% 0% 1%;
+    justify-content:flex-end;
+}
+
+button {
+    border: none;
+    font-size: 1.5rem;
+    background-color:var(--main-color);
+    color: var(--light-color);
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* HEADER */
+header a:link {
+    color: var(--light-color);
+}
+
+header a:visited {
+    color: var(--light-color);
+}
+
+/* NAV */
+/* Afects the nav bar */
+.left {
+    justify-content: flex-start;
+}
+
+.time {
+    justify-content: flex-end;
+}
+
+/* START */
+.start {
+    justify-content: center;
+    margin: 0% 20% 0% 20%;
+    text-align: center;
+}
+
+/* SECTIONS OF QUIZ */
+.quizz {
+    justify-content: left;
+    margin: 0% 20% 0% 20%;
+    text-align: left;
+}
+
+.quizz button {
+    display: flex;
+    flex-direction: row;
+}
+
+/* HIGHSCORE */
+.highscore {
+    justify-content: center;
+    margin: 0% 20% 0% 20%;
+    text-align: center;
+}
+
+/* DISPLAY */
+.start {
+    display: y;
+}
+
+.quizz {
+    display: none;
+}
+
+.highscore {
+    display: none;
+}
+
+.answers {
+    display: none;
+}
+
+/* HOVER */
+nav a:hover {
+    color: var(--main-color);
+}

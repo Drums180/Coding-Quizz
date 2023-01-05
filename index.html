@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Code Quiz</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    </head>
+
+    <body>
+        <div>
+            <header>
+                <nav>
+                    <ul>
+                        <li class = "left"><a href="#highscore">View Highscores</a></li>
+                        <li class="time">Time: 50</li> 
+                        <!-- TODO: Connect time with javascript through the DOM -->
+                    </ul>
+                </nav>
+            </header>
+
+            <article class="start">
+                <h1>Coding Quiz Challenge</h1>
+                <p>Welcome to the Coding Quiz Challenge experience!! 
+                In this online quizz, you will be able to prove your 
+                knowledge regarding coding in HTML, CSS, JAVASCRIPT, 
+                and accesing the DOM. The purpouse of this challenge is 
+                to answer 5 questions before the time runs out. Give it 
+                a try, we believe in you!!</p>
+                <button>Start Quiz</button>
+            </article>
+        </div>
+
+        <div class ="quizz">
+            
+            <article class="questions">
+                <h2></h2>
+                <ul class = "answers">
+                    <button>a.</button>
+                    <button>b.</button>
+                    <button>c.</button>
+                    <button>d.</button>
+                </ul>
+            </article>
+        </div>
+
+        <div class="highscore" id="highscore">
+
+            <article id="players">
+                <h1>Highscore list</h1>
+                <ul>
+                </ul>
+                <button class="home">Go Back</button>
+                <!-- TODO: Connect button "Go Back" to display start div and hide highscores -->
+                <button class="restart">Clear Highscores</button>
+            </article>
+        </div>
+        <script src="./assets/js/script.js"></script>
+    </body>
+</html>
