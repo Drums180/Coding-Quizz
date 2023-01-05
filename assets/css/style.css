@@ -26,7 +26,7 @@ h2{
 }
 
 h3{
-    font-size: 2.7rem;
+    font-size: 2.9rem;
     text-align: left;
     color: var(--light-color);
 }
@@ -36,12 +36,16 @@ p {
     line-height: 3.5rem;
 }
 
+nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
 nav li {
-    display: inline;
     list-style: none;
     color: var(--light-color);
     font-size: 1.7rem;
-    margin: 0% 1% 0% 1%;
+    margin: 0% 2% 0% 2%;
 }
 
 button {
@@ -86,13 +90,6 @@ header a:visited {
 
 /* NAV */
 /* Afects the nav bar */
-.left {
-    justify-content: flex-start;
-}
-
-.time {
-    justify-content: flex-end;
-}
 
 /* START */
 .start {
@@ -111,6 +108,7 @@ header a:visited {
 .quizz button {
     display: flex;
     flex-direction: row;
+    margin: 1rem 0rem;
 }
 
 /* SECTIONS OF REGISTRATION */
@@ -118,6 +116,12 @@ header a:visited {
     justify-content: left;
     margin: 0% 20% 0% 20%;
     text-align: left;
+}
+
+.score {
+    color: var(--main-light);
+    font-weight: 600;
+    font-size: 2.3rem;
 }
 
 /* HIGHSCORE */
