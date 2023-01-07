@@ -18,6 +18,7 @@ var highscoreButton = document.querySelector(".highscoreButton");
 var highscore = document.querySelector(".highscore");
 var backButton = document.querySelector(".home");
 var ol = document.querySelector(".scores");
+var clearButton = document.querySelector(".restart")
 
 
 // ARRAY OF QUESTIONS
@@ -88,8 +89,8 @@ function goBack() {
     highscore.style.display = "none";
 
     //Eliminate list elements so they don´t acumulate when entering the highscores
-    var list = document.querySelector('ol');
-    list.innerHTML = '';
+    var list = document.querySelector("ol");
+    list.innerHTML = "";
 }
 
 // FUNCTION FOR SUBMITTING INITIALS TO HIGHSCORE 
@@ -111,18 +112,13 @@ function submit() {
 
     highscores.push(currentScore);
     localStorage.setItem("highscores", JSON.stringify(highscores));
-
+    
+    showHighscores();
     displayHighScores();
     resetTimer();
 }
 
-// FUNCTION TO DISPLAY HIGHSCORES WITH BUTTON 
-function displayHighscores() {
-    homeElement.style.display = "none";
-    quizzElement.style.display = "none";
-    registrationElement.style.display = "none";
-    highscore.style.display = "block";
-
+function showHighscores() {
     var totalHighscores = localStorage.getItem('highscores');
     console.log (totalHighscores) //Check for bugs
     totalHighscores = JSON.parse(totalHighscores);
@@ -138,7 +134,28 @@ function displayHighscores() {
         ol.appendChild(li);
     }
 
+}
+
+// FUNCTION TO DISPLAY HIGHSCORES WITH BUTTON 
+function displayHighscores() {
+    showHighscores();
+    
+    homeElement.style.display = "none";
+    quizzElement.style.display = "none";
+    registrationElement.style.display = "none";
+    highscore.style.display = "block";
+
     resetTimer();
+}
+
+// FUNCTION FOR CLEARING HIGHSCORE 
+function clearHighscore() {
+    highscores = [];
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    //Eliminate list elements since are no longer in Local Storage
+    var list = document.querySelector("ol");
+    list.innerHTML = "";
 }
 
 // FUNCTION FOR ASKING A QUESTIONS 
@@ -265,3 +282,4 @@ startButton.addEventListener("click",startGame);
 backButton.addEventListener("click",goBack)
 highscoreButton.addEventListener("click",displayHighscores);
 submitButton.addEventListener("click",submit);
+clearButton.addEventListener("click",clearHighscore);
