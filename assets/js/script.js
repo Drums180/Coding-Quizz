@@ -60,9 +60,14 @@ function setTime() {
         secondsLeft--;
         timeEl.textContent = "Time: " + secondsLeft;
 
-     if(secondsLeft === 0) {
+     if(secondsLeft < 0) {
         clearInterval(countDown);
         timeEl.textContent = "Time is OVER";
+        scoreRegistration();
+      } else if(secondsLeft === 0) { 
+        clearInterval(countDown);
+        timeEl.textContent = "Time is OVER";
+        secondsLeft = 0
         scoreRegistration();
       }
   
@@ -107,7 +112,7 @@ function submit() {
     var currentScore = {
         score: finalScore,
         player: textInput,
-        time: secondsLeft
+        time: (50 - secondsLeft)
     };
 
     highscores.push(currentScore);
@@ -200,6 +205,7 @@ function validation() {
         nextQuestion()
         resultElement.textContent = "Wrong!";
         resultElement.style.borderTopWidth = "2px";
+        secondsLeft = secondsLeft - 10;
         // Let the user know the answer is wrong
     }
 }
