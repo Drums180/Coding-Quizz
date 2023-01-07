@@ -86,6 +86,10 @@ function goBack() {
     quizzElement.style.display = "none";
     registrationElement.style.display = "none";
     highscore.style.display = "none";
+
+    //Eliminate list elements so they don´t acumulate when entering the highscores
+    var list = document.querySelector('ol');
+    list.innerHTML = '';
 }
 
 // FUNCTION FOR SUBMITTING INITIALS TO HIGHSCORE 
