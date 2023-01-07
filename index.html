@@ -13,9 +13,8 @@
             <header>
                 <nav>
                     <ul>
-                        <li class = "left"><a href="#highscore">View Highscores</a></li>
+                        <li class = "highscoreButton"><a href="#highscore">View Highscores</a></li>
                         <li class="time">Time: 50</li> 
-                        <!-- TODO: Connect time with javascript through the DOM -->
                     </ul>
                 </nav>
             </header>
@@ -42,6 +41,7 @@
                     <button id="choice3" type="button" value="3"></button>
                     <button id="choice4" type="button" value="4"></button>
                 </ul>
+                <p class = "result"></p>
             </article>
         </div>
 
@@ -50,7 +50,7 @@
             <article>
                 <h3>All done!</h3>
                 <p class = "score"></p>
-                <p>Enter initials:  <span><input type="text"></span> <span><button>Submit!</button></span></p>
+                <p>Enter initials:  <span><input id = "textInput" type="text"></span> <span><button class = "submit">Submit!</button></span></p>
             </article>
         </div>
 
@@ -58,10 +58,9 @@
 
             <article id="players">
                 <h1>Highscore list</h1>
-                <ul>
-                </ul>
+                <ol class ="scores">
+                </ol>
                 <button class="home">Go Back</button>
-                <!-- TODO: Connect button "Go Back" to display start div and hide highscores -->
                 <button class="restart">Clear Highscores</button>
             </article>
         </div>

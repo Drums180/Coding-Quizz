@@ -1,9 +1,24 @@
 // DEFINING VARIABLES OF ELEMENTS
+//Variables for Start
 var homeElement = document.querySelector(".start");
+var startButton = document.getElementById("goButton");
+
+//Variables for Quizz
 var quizzElement = document.querySelector(".quizz");
+var resultElement = document.querySelector(".result");
+var questionElement = document.querySelector(".question");
+
+//Variables for Result Registration
 var registrationElement = document.querySelector(".registration");
-var scoreElement = document.querySelector(".score")
-var questionElement = document.querySelector(".question")
+var scoreElement = document.querySelector(".score");
+var submitButton = document.querySelector(".submit");
+    
+//Variables for Highscores
+var highscoreButton = document.querySelector(".highscoreButton");
+var highscore = document.querySelector(".highscore");
+var backButton = document.querySelector(".home");
+var ol = document.querySelector(".scores");
+
 
 // ARRAY OF QUESTIONS
 var questions = [
@@ -36,39 +51,110 @@ var questions = [
 
 // TIMER
 var timeEl = document.querySelector(".time");
-var startButton = document.getElementById("goButton");
-
 var secondsLeft = 50;
+var countDown;
 
 function setTime() {
-    var countDown = setInterval(function() {
+    countDown = setInterval(function() {
         secondsLeft--;
         timeEl.textContent = "Time: " + secondsLeft;
 
      if(secondsLeft === 0) {
         clearInterval(countDown);
         timeEl.textContent = "Time is OVER";
-        // TODO: CREATE FUNCTION TO REGISTER SCORE
         scoreRegistration();
       }
   
     }, 1000);
 }
 
+function resetTimer() {
+    // Reset the timer in case the quizz is stopped
+    clearTimeout(countDown);
+    secondsLeft = 50;
+    timeEl.textContent = "Time: " + secondsLeft;
+}
+
+function stopTimer() {
+    // Stop the timer in case the quizz ended
+    clearTimeout(countDown);
+}
+
+// FUNCTION FOR GOING BACK IN HIGHSCORE
+function goBack() {
+    homeElement.style.display = "block";
+    quizzElement.style.display = "none";
+    registrationElement.style.display = "none";
+    highscore.style.display = "none";
+}
+
+// FUNCTION FOR SUBMITTING INITIALS TO HIGHSCORE 
+var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+function submit() {
+    homeElement.style.display = "none";
+    quizzElement.style.display = "none";
+    registrationElement.style.display = "none";
+    highscore.style.display = "block";
+
+    var textInput = document.getElementById("textInput").value;
+
+    var currentScore = {
+        score: finalScore,
+        player: textInput,
+        time: secondsLeft
+    };
+
+    highscores.push(currentScore);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    displayHighScores();
+    resetTimer();
+}
+
+// FUNCTION TO DISPLAY HIGHSCORES WITH BUTTON 
+function displayHighscores() {
+    homeElement.style.display = "none";
+    quizzElement.style.display = "none";
+    registrationElement.style.display = "none";
+    highscore.style.display = "block";
+
+    var totalHighscores = localStorage.getItem('highscores');
+    console.log (totalHighscores) //Check for bugs
+    totalHighscores = JSON.parse(totalHighscores);
+    console.log (totalHighscores) //Check for bugs
+
+    for (var i = 0; i < totalHighscores.length; i++) {
+        var scoreX = totalHighscores[i].score;
+        var playerX = totalHighscores[i].player;
+        var timeX = totalHighscores[i].time;
+
+        var li = document.createElement("li");
+        li.textContent = playerX + " - " + scoreX  + " - " + timeX + " sec";
+        ol.appendChild(li);
+    }
+
+    resetTimer();
+}
+
+// FUNCTION FOR ASKING A QUESTIONS 
+
 // Establish variables to control questions and score 
 var currentQuestion = 0;
 var score = 0;
 var askingQuestion = true;
 
-// FUNCTION FOR ASKING A QUESTIONS 
 function askQuestion() {
     
     var choices = questions[currentQuestion].choices;
     questionElement.textContent = questions[currentQuestion].question
+    //Clear the element result so it restarts at the beginneng of each question
     for (var i = 0; i < choices.length; i++) {
         var answer = document.getElementById("choice" + (i + 1));
         answer.value = (i + 1);
         answer.textContent = choices[i];
+        resultElement.textContent = "" 
+        resultElement.style.borderTopWidth = "0px";
         checkAnswer()
     }
 
@@ -84,9 +170,16 @@ function validation() {
         //The validation in the if must have only two == as the value is registered as string 
         score++;
         console.log("IT WAS CORRECT") //Checking for bugs
+        // Let the user know the answer is correct
+        resultElement.textContent = "Correct!";
+        resultElement.style.borderTop = "2px solid var(--result);";
+        resultElement.style.borderTopWidth = "2px";
         nextQuestion()
     } else {
         nextQuestion()
+        resultElement.textContent = "Wrong!";
+        resultElement.style.borderTopWidth = "2px";
+        // Let the user know the answer is wrong
     }
 }
 
@@ -107,39 +200,64 @@ function checkAnswer() {
 
 // FUNCTION TO PASS TO THE NEXT QUESTION 
 function nextQuestion() {
-    currentQuestion++;
-    if (currentQuestion == questions.length) {
-      // TODO: CREATE FUNCTION TO REGISTER SCORE
-      scoreRegistration();
-    } else {
-      askingQuestion = true;
-      askQuestion();
-    }
+    setTimeout(function() {
+        currentQuestion++;
+        if (currentQuestion == questions.length) {
+          scoreRegistration();
+          stopTimer();
+
+        } else {
+          askingQuestion = true;
+          askQuestion();
+        }
+    }, 1000);
+    // Function setTimeout allows 1 second to pass / or 1000 miliseconds
 }
 
 // FUNCTION TO REGISTER THE SCORE 
+var finalScore;
+
 function scoreRegistration() {
-    var finalScore = score * (100/(questions.length))
+    finalScore = score * (100/(questions.length))
     quizzElement.style.display = "none"
     registrationElement.style.display = "block"
-    
+
     scoreElement.textContent = "Your score is " + finalScore;
+}
+
+// FUNCTION TO STORE SCORE AND RESTART QUIZZ 
+
+function displayHighScores() {
+    var highscores = [];
+    highscores.sort(function(a, b) {
+      return b.score - a.score;
+    });
+    for (var i = 0; i < highscores.length; i++) {
+      var player = document.createElement("li");
+      player.textContent = "-" + highscores[i].score;
+      list.appendChild(player);
+    }
 }
 
 // GAME FUNCTION: Run the questions, penalizes time and adds up the score for each question
 function startGame() {
     homeElement.style.display = "none";
     quizzElement.style.display = "block";
+
+    resultElement.textContent = "";
+    resultElement.style.borderTopWidth = "0px";
     
-    setTime()
+    setTime();
 
     // Modify the array so the questions change the order every time
     questions.sort(function() {
         return Math.random() - 0.5;
     });
     
-    askQuestion()
-    
+    askQuestion();
 }
 
-startButton.addEventListener('click',startGame);
+startButton.addEventListener("click",startGame);
+backButton.addEventListener("click",goBack)
+highscoreButton.addEventListener("click",displayHighscores);
+submitButton.addEventListener("click",submit);

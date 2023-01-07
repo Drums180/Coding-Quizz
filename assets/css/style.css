@@ -7,6 +7,7 @@
     --main-color: rgb(137, 64, 255);
     --highscore: rgb(221, 255, 197);
     --titles: rgb(255, 187, 255);
+    --result: rgb(146, 146, 146);
     --circular-edges: 10px;
     --light-circular-edges: 5px;
     --circle: 25px;
@@ -111,6 +112,13 @@ header a:visited {
     margin: 1rem 0rem;
 }
 
+.result {
+    color: var(--result);
+    font-style: italic;
+    display: block;
+    border-top: 0px solid var(--result);
+}
+
 /* SECTIONS OF REGISTRATION */
 .registration {
     justify-content: left;
@@ -129,6 +137,19 @@ header a:visited {
     justify-content: center;
     margin: 0% 20% 0% 20%;
     text-align: center;
+}
+
+.highscore li{
+    border: none;
+    text-align: left;
+    font-size: 1.7rem;
+    margin: 1% 0%;
+    background-color:var(--dark-color);
+    color: var(--light-color);
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+
 }
 
 /* DISPLAY */
